@@ -64,9 +64,10 @@ input_data = pd.DataFrame({
     'wifi': [wifi]
 })
 
-# Prediction
+# prediction
 if st.button("Predict Price Range"):
-    prediction = model.predict(input_data)[0]
+
+    prediction = int(model.predict(input_data)[0])
 
     price_labels = {
         0: "Low Cost",
@@ -75,12 +76,17 @@ if st.button("Predict Price Range"):
         3: "Very High Cost"
     }
 
-    st.success(
-        f"Predicted Mobile Price Range: **{price_labels.get(prediction, prediction)}**"
+    st.markdown("## Prediction Result")
+
+    st.metric(
+        label="Price Range Number",
+        value=prediction
     )
 
-    st.subheader("Input Specifications")
-    st.dataframe(input_data)
+    st.metric(
+        label="Price Category",
+        value=price_labels[prediction]
+    )
 
 # Footer
 st.markdown("---")
