@@ -69,17 +69,16 @@ if st.button("Predict Price Range"):
 
     prediction = int(model.predict(input_data)[0])
 
-    price_ranges = {
-        0: "₹0 - ₹10,000",
-        1: "₹10,000 - ₹20,000",
-        2: "₹20,000 - ₹30,000",
-        3: "₹30,000+"
-    }
+    if prediction == 0:
+        price_range = "₹0 - ₹10,000"
+    elif prediction == 1:
+        price_range = "₹10,000 - ₹20,000"
+    elif prediction == 2:
+        price_range = "₹20,000 - ₹30,000"
+    else:
+        price_range = "₹30,000+"
 
-    st.metric(
-        label="Estimated Mobile Price",
-        value=price_ranges[prediction]
-    )
+    st.success(f"Estimated Mobile Price Range: {price_range}")
 
 # Footer
 st.markdown("---")
